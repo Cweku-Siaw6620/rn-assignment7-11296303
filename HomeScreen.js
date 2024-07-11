@@ -1,16 +1,34 @@
+import { useState,useEffect,useContext } from 'react';
 import { StyleSheet, Text, View,Image,SafeAreaView,  TouchableOpacity} from 'react-native';
-import CartScreen from './CartScreen';
 
 
-export default function HomeScreen() {
-  return (
+
+export default function HomeScreen({navigation}) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+    .then(res => res.json())
+    .then(json => {
+      setProducts(json); 
+      setLoading(false);
+    }) 
+    .catch(error => {
+      console.error(error);
+      setLoading(false);
+    })
+    
+  }, [])
+
+ return (
     <SafeAreaView style={{ flex: 1 }}>
     
     <View style={styles.header}>
     <TouchableOpacity >
     <Image source={require('./assets/Menu.png')} style={{ width: 24, height: 24 }} />
     </TouchableOpacity>
-    <Image source={require('./assets/Logo.png')} style={{ width: 230, height: 90 ,alignSelf: 'center' }} />
+    <Image source={require('./assets/Logo.png')} style={{ width: 220, height: 90 ,alignSelf: 'center' }} />
     
     <View style={{flexDirection:"row"}}>
        <TouchableOpacity>
@@ -34,7 +52,6 @@ export default function HomeScreen() {
                     </TouchableOpacity>
                 </View>
             </View>
-            
     </SafeAreaView>
   );
 }
