@@ -40,6 +40,11 @@ export default function CartScreen(){
 
   return (
     <View style={styles.container}>
+      <View style={{ alignItems: 'center' }}>
+                <Image source={require('./assets/Logo.png')} />
+            </View>
+           
+            
       <Text style={styles.title}>Checkout</Text>
       <FlatList
         data={cartItems}

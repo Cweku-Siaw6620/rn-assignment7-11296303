@@ -1,36 +1,3 @@
-{/*import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-
-
-export default function ProductCard({image, name, description, price, onAddTOCart}) {
-
-  return (
-    <View style={styles.container}>
-        <View>
-            <Image source={{uri: image}}/>
-            <TouchableOpacity onPress={onAddTOCart}>
-            <Image source={require("../assets/add_circle.png")}/>
-            </TouchableOpacity>
-        </View>
-
-        <Text>{name}</Text>
-        <Text>{description}</Text>
-        <Text>${price}</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    overflow: 'hidden',
-    width:100,
-    padding: 10,
-    marginBottom: 20,
-  },
-});
-*/}
-
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View,SafeAreaView } from 'react-native';
 

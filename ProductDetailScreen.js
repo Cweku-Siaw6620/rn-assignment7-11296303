@@ -1,4 +1,5 @@
-import { StyleSheet,View, Text, Image, ScrollView} from 'react-native';
+import { StyleSheet,View, Text, Image, ScrollView,TouchableOpacity} from 'react-native';
+
 
 export default function ProductDetailScreen({route}) {
 const {product} = route.params;
@@ -6,6 +7,24 @@ const {product} = route.params;
   return (
     <>
    <ScrollView style={styles.container}>
+
+   <View style={styles.header}>
+    <TouchableOpacity >
+    <Image source={require('./assets/Menu.png')} style={{ width: 24, height: 24 }} />
+    </TouchableOpacity>
+    <Image source={require('./assets/Logo.png')} style={{ width: 220, height: 90 ,alignSelf: 'center' }} />
+    
+    <View style={{flexDirection:"row"}}>
+       <TouchableOpacity>
+     <Image source={require('./assets/Search.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
+     </TouchableOpacity>
+     <TouchableOpacity>
+     <Image source={require('./assets/shopping bag.png')} style={{ width: 24, height: 24 }} />
+       </TouchableOpacity>
+     </View>
+    </View>
+    
+
         <Image source={{uri: product.image}} style={styles.image}/>
         <Text style={styles.names}>{product.title}</Text>
         <Text style={styles.price}>${product.price}</Text>
@@ -48,6 +67,12 @@ const {product} = route.params;
         
         
    </ScrollView>
+
+   <TouchableOpacity style={styles.addToBasketContainer}>
+                <Image style={styles.whiteIcon} source={require('./assets/Plus.png')} />
+                <Text style={{ color: 'white', fontSize: 18 }}>Add to basket</Text>
+                <Image style={styles.whiteIcon} source={require('./assets/Heart.png')} />
+            </TouchableOpacity>
    </>
   );
 }
@@ -57,6 +82,14 @@ const styles = StyleSheet.create({
     flex: 1,
    padding: 20,
   
+  },
+  header:{
+    flexDirection: "row",
+    columnGap:10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    marginTop: 40
   },
   image:{
     width: '100%',
@@ -79,6 +112,19 @@ const styles = StyleSheet.create({
     marginTop: 25,
     fontWeight: 'bold',
     fontSize: 22,
-  }
+  },
+  whiteIcon: {
+    tintColor: 'white',
+    width: 24,
+    height: 24,
+},
+addToBasketContainer: {
+    backgroundColor: 'black',
+    height: 50,
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+},
 
 });

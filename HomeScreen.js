@@ -53,8 +53,8 @@ export default function HomeScreen({navigation}) {
     cartItems.push(product);
     await AsyncStorage.setItem('cart', JSON.stringify(cartItems));
     navigation.navigate('Cart'); 
+    
   };
-
   
 
  return (
