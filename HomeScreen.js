@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CART_ITEMS = 'CART_ITEMS';
 
-const storeCartItems = async (items) => {
+export const storeCartItems = async (items) => {
   try {
     await AsyncStorage.setItem(CART_ITEMS, JSON.stringify(items));
   } catch (e) {
@@ -14,7 +14,7 @@ const storeCartItems = async (items) => {
   }
 };
 
-const getCartItems = async () => {
+export const getCartItems = async () => {
   try {
     const items = await AsyncStorage.getItem(CART_ITEMS);
     return items ? JSON.parse(items) : [];

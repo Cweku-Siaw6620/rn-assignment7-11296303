@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const ProductCard = ({ products, addToCart, onProductPress }) => {
+export default ProductCard = ({ products, addToCart, onProductPress }) => {
   return (
     <FlatList
       data={products}
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductList;
+
