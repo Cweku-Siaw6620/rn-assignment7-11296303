@@ -1,25 +1,59 @@
 import { useState,useEffect,useContext } from 'react';
-import { StyleSheet, Text, View,Image,SafeAreaView,  TouchableOpacity} from 'react-native';
+import axios from 'axios';
+import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, } from 'react-native';
+import ProductCard from './components/ProductCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const CART_ITEMS = 'CART_ITEMS';
+
+const storeCartItems = async (items) => {
+  try {
+    await AsyncStorage.setItem(CART_ITEMS, JSON.stringify(items));
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const getCartItems = async () => {
+  try {
+    const items = await AsyncStorage.getItem(CART_ITEMS);
+    return items ? JSON.parse(items) : [];
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 
 export default function HomeScreen({navigation}) {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
+  
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-    .then(res => res.json())
-    .then(json => {
-      setProducts(json); 
-      setLoading(false);
-    }) 
-    .catch(error => {
-      console.error(error);
-      setLoading(false);
-    })
-    
-  }, [])
+    const fetchProducts = async () => {
+      const response = await axios.get('https://fakestoreapi.com/products');
+      setProducts(response.data);
+    };
+     
+    const loadCartItems = async () => {
+      const items = await getCartItems();
+      if (items) {
+        setCartItems(items);
+      }
+    };
+
+    fetchProducts();
+    loadCartItems();
+  },[])
+
+  const addToCart = async (product) => {
+    const updatedCart = [...cartItems, product];
+    setCartItems(updatedCart);
+    await storeCartItems(updatedCart);
+  };
+  
+
+  
 
  return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -39,7 +73,6 @@ export default function HomeScreen({navigation}) {
        </TouchableOpacity>
      </View>
     </View>
-
     
     <View style={styles.subheader}>
                 <Text style={{ fontSize: 24, padding: 10 }}>OUR STORY</Text>
@@ -51,6 +84,13 @@ export default function HomeScreen({navigation}) {
                         <Image source={require('./assets/Filter.png')} style={{ width: 40, height: 24 }} />
                     </TouchableOpacity>
                 </View>
+            </View>
+            <View>
+            <ProductCard 
+            products={products}
+        addToCart={addToCart}
+        onProductPress={(product) => navigation.navigate('ProductDetail', { product })}
+      />
             </View>
     </SafeAreaView>
   );

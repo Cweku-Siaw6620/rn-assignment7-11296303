@@ -1,17 +1,19 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createContext } from 'react';
 import HomeScreen from './HomeScreen';
 import CartScreen from './CartScreen';
 import { enableScreens } from 'react-native-screens';
 import ProductDetailScreen from './ProductDetailScreen';
 
-
 enableScreens();
 
 const Stack = createStackNavigator();
 
+export const CartContext = createContext();
 
 export default function App() {
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
