@@ -35,6 +35,8 @@ import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default ProductCard = ({ products, addToCart, onProductPress }) => {
+
+  
   return (
     <FlatList
       data={products}
@@ -52,13 +54,14 @@ export default ProductCard = ({ products, addToCart, onProductPress }) => {
               {item.price !== undefined ? `$${parseFloat(item.price).toFixed(2)}` : 'N/A'}
             </Text>
             <TouchableOpacity onPress={() => addToCart(item)}>
-              {/*<Text style={styles.buttonText}>Add to Cart</Text>*/}
               <Image source={require("../assets/add_circle.png")} style={{height:40, width:40}}/>
             </TouchableOpacity>
           </View>
         
       )}
+      
     />
+
   );
 };
 

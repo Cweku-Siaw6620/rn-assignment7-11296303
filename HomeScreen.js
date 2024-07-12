@@ -1,4 +1,4 @@
-import { useState,useEffect,useContext } from 'react';
+import { useState,useEffect, } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, } from 'react-native';
 import ProductCard from './components/ProductCard';
