@@ -32,12 +32,13 @@ const styles = StyleSheet.create({
 */}
 
 import React from 'react';
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View,SafeAreaView } from 'react-native';
 
 export default ProductCard = ({ products, addToCart, onProductPress }) => {
 
   
   return (
+    <SafeAreaView style={styles.container}>
     <FlatList
       data={products}
       keyExtractor={(item, index) => item.id.toString() + index.toString()}
@@ -61,7 +62,7 @@ export default ProductCard = ({ products, addToCart, onProductPress }) => {
       )}
       
     />
-
+</SafeAreaView>
   );
 };
 

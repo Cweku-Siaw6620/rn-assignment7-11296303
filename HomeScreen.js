@@ -50,8 +50,10 @@ export default function HomeScreen({navigation}) {
     const updatedCart = [...cartItems, product];
     setCartItems(updatedCart);
     await storeCartItems(updatedCart);
+    cartItems.push(product);
+    await AsyncStorage.setItem('cart', JSON.stringify(cartItems));
+    navigation.navigate('Cart'); 
   };
-  
 
   
 
